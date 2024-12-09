@@ -10,3 +10,47 @@ The system architecture is a modular, event-driven, scalable deep learning (DL) 
 - **Results Retrieval**: A standalone Results Retrieval ECS task is used for post-processing.
 
 The architecture is designed to be highly scalable, fault-tolerant, and cost-efficient, with components working independently to ensure seamless communication and processing.
+
+---
+
+
+### Current Containers:
+
+#### AWS FastAPI Server Container:
+1. **Dockerized FastAPI Application:**
+   - Tested the Dockerized FastAPI application locally to confirm functionality.
+   - Successfully built and tagged the FastAPI application Docker image.
+
+2. **AWS ECR Setup:**
+   - Created a private ECR repository (`fastapi-server-image-processing`) for the Docker image.
+   - Pushed the Docker image to ECR successfully after resolving IAM permission issues.
+
+3. **AWS ECS and Task Definition:**
+   - Created an ECS cluster using AWS Fargate.
+   - Defined a task for the FastAPI container with appropriate IAM roles and resource limits, and using the pushed Docker image from ECR.
+   - Configured port mappings and networking mode (`awsvpc`).
+
+4. **Service Deployment:**
+   - Deployed the ECS task as a service in the cluster.
+   - Attached an Application Load Balancer (ALB) to handle traffic to the containerized FastAPI server.
+
+5. **Integration Testing:**
+   - Tested the deployed FastAPI service using the client script.
+   - Verified connectivity with AWS S3 and SQS services for uploading files and sending metadata.
+
+6. **Auto Scaling and Monitoring:**
+   - Configured ECS Service Auto Scaling to handle increasing workloads.
+   - Set up monitoring and logging using Amazon CloudWatch.
+
+---
+
+### Next AWS Containers:
+
+#### AWS Image Processing Container:
+- Containerize the image processing logic.
+- Create a new ECS task definition.
+- Configure an EventBridge rule to trigger the ECS task based on SQS message events.
+
+#### AWS Results Retrieval Container:
+- Containerize the logic to fetch results from DynamoDB.
+- Set up task definitions.
