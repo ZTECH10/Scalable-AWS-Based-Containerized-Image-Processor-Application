@@ -1,4 +1,4 @@
-# Scalable-AWS-Based-Containerized-Application
+# Scalable Containerized Deep Learning Image Processing on AWS
 Scalable AWS-Based Containerized Application
 
 The system architecture is a modular, event-driven, scalable deep learning (DL) image-processing pipeline deployed on AWS, consisting of three main containers: FastAPI server, image processing, and results retrieval.
